@@ -10,54 +10,55 @@ function computerPlay() {
     }
 }
 
-function playerPlay() {
-    let choice = prompt("Rock, Paper, or Scissors?")
-    return choice.toLowerCase();
-}
-
-function playRound(computerSelection, playerSelection) {
-    if (playerSelection === computerSelection) {
-        console.log("It's a tie!")
-        return null;
-    } else if (playerSelection === 'rock' && computerSelection === 'scissors') {
-        console.log("You win this round!")
-        return true;
-    } else if (playerSelection === 'paper' && computerSelection === 'rock') {
-        console.log("You win this round!")
-        return true;
-    } else if (playerSelection === 'scissors' && computerSelection === 'paper') {
-        console.log("You win this round!")
-        return true;
-    } else {
-        console.log("The computer wins this round!")
-        return false;
-    }   
-}
 
 function game() {
+    let playerScore = 0; 
     let computerScore = 0;
-    let playerScore = 0;
-    while(true){
-        const computerSelection = computerPlay();
-        const playerSelection = playerPlay();
-        const outcome = playRound(computerSelection, playerSelection)
+    
+    const container = document.querySelector(".container")
+    const buttons = document.querySelectorAll("button");
+    const displayScore = document.createElement('span');
+    container.appendChild(displayScore);
+    const displayWinner = document.createElement('span');
+    container.appendChild(displayWinner);
+    
+    buttons.forEach((button) => {
+        button.addEventListener('click', () => {
+            console.log(button.id)
+            const whoWon = playRound(computerPlay(), button.id);
+            if (whoWon) {
+                playerScore++;
+                displayWinner.textContent = "Player wins this round!";
+            }
+            else if ( whoWon == false) {
+                computerScore++;
+                displayWinner.textContent = "Computer wins this round!";
+            } else {
+                displayWinner.textContent = "It's a tie.";
+            }
+            displayScore.textContent = `Player score = ${playerScore} Computer score = ${computerScore}`;
+        });
+    });
+}
 
-        if (outcome === true) {
-            ++playerScore;
-        } else if (outcome === false) {
-            ++computerScore;
-        }
-        
-        console.log(`Computer score:${computerScore} Your score:${playerScore}`)
-       
-        if (computerScore === 5) {
-            console.log("Computer wins the game!")
-            break
-        } else if (playerScore === 5) {
-            console.log("You win the game!")
-            break
-        }
+function playRound(computerPlay, playerChoice) {
+    
+    if (computerPlay === playerChoice){
+        return null;
     }
+    else if (playerChoice === 'rock' && computerPlay === "scissors") {    
+        return true;
+    }
+    else if (playerChoice === 'paper' && computerPlay === 'rock') {   
+        return true;
+    }
+    else if (playerChoice === 'scissors' && computerPlay === 'paper') {     
+        return true;
+    }
+    else {
+        return false;
+    }
+
 }
 
 game()
