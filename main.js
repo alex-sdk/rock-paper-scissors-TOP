@@ -18,8 +18,8 @@ function game() {
     const container = document.querySelector(".container")
     const buttons = document.querySelectorAll("button");
     const displayScore = document.createElement('span');
-    container.appendChild(displayScore);
     const displayWinner = document.createElement('span');
+    container.appendChild(displayScore);
     container.appendChild(displayWinner);
     
     buttons.forEach((button) => {
