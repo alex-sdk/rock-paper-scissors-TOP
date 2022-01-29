@@ -1,3 +1,6 @@
+let playerScore = 0;
+let computerScore = 0; 
+
 function computerPlay() {
     let randomNum = Math.floor(Math.random() * 3);
     if (randomNum === 0) {
@@ -23,10 +26,6 @@ function playRound(computerPlay, playerChoice) {
     return false;  
 }
 function game() {
-    
-    let playerScore = 0; 
-    let computerScore = 0; 
-    
     const header = document.querySelector("header")
     const displayWinner = document.createElement('div');
     displayWinner.className = "winner";
